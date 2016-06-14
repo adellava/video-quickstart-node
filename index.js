@@ -29,9 +29,9 @@ app.get('/token', function(request, response) {
     // Create an access token which we will sign and return to the client,
     // containing the grant we just created
     var token = new AccessToken(
-        "AC7f9fa9b76d718669fe1d12d03dceec4f",
-        "SKad9544d1eea3cece1fb3f3c19349624f",
-        "EZmKX9ByDBzvBUQZ4u39Xky71RiLegc6"
+        process.env.TWILIO_ACCOUNT_SID,
+        process.env.TWILIO_API_KEY,
+        process.env.TWILIO_API_SECRET
     );
 
     // Assign the generated identity to the token
@@ -39,7 +39,7 @@ app.get('/token', function(request, response) {
 
     //grant the access token Twilio Video capabilities
     var grant = new ConversationsGrant();
-    grant.configurationProfileSid = "VSbb06b0f8a42fcc8e37e33b96a43d7b0e";
+    grant.configurationProfileSid = process.env.TWILIO_CONFIGURATION_SID;
     token.addGrant(grant);
 
     // Serialize the token to a JWT string and include it in a JSON response
